@@ -1,0 +1,68 @@
+<div class="app-wrapper">
+  <h3>People</h3>
+  <form class="form" #form="ngForm" (ngSubmit)="submit(form)">
+    <div class="form-group">
+      <input
+        #firstname="ngModel"
+        type="text"
+        class="form-control"
+        name="firstname"
+        placeholder="First Name"
+        required
+        minlength="2"
+        maxlength="50"
+        ngModel
+      />
+      <div
+        *ngIf="firstname.touched && firstname.invalid"
+        class="alert alert-danger"
+      >
+        <span *ngIf="firstname.errors.required">First name is required.</span>
+        <span *ngIf="firstname.errors.minlength"
+          >Minimum
+          {{ firstname.errors.minlength.requiredLength }} characters</span
+        >
+      </div>
+    </div>
+    <div class="form-group">
+      <input
+        #lastname="ngModel"
+        type="text"
+        class="form-control"
+        name="lastname"
+        placeholder="Last Name"
+        required
+        minlength="2"
+        maxlength="50"
+        ngModel
+      />
+      <div
+        *ngIf="lastname.touched && lastname.invalid"
+        class="alert alert-danger"
+      >
+        <span *ngIf="lastname.errors.required">Last name is required.</span>
+        <span *ngIf="lastname.errors.minlength"
+          >Minimum
+          {{ lastname.errors.minlength.requiredLength }} characters</span
+        >
+      </div>
+    </div>
+    <button type="submit" class="add btn">Add</button>
+  </form>
+  <table class="table">
+    <thead>
+      <th>First</th>
+      <th>Last</th>
+      <th></th>
+    </thead>
+    <tbody>
+      <tr *ngFor="let user of userList; let i = index">
+        <td>{{ user.firstname }}</td>
+        <td>{{ user.lastname }}</td>
+        <td>
+          <button type="button" class="add" (click)="delete(i)">Delete</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
